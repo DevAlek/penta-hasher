@@ -14,6 +14,6 @@ while True:
     sha1=hashlib.sha1(sha3_512).hexdigest().encode('utf-8')
     sha3_384=hashlib.sha3_384(sha1).hexdigest()
     result=sha3_384
-    pyperclip.copy(result)
-    print('hash moved to clipboard')
+    try:pyperclip.copy(result);print('hash moved to clipboard')
+    except:print('failed to copy your hash automatically')
     print(result)
