@@ -101,31 +101,37 @@ def islink(line, dec=None):
 		except:pass
 	return False
 
-def single_assure(lib: str, output=False):
+def single_assure(lib: str, output=False, sudo=False):
 	result=False
 	method=[]
 	got=False
 	count=0
+	sudo=''
 	send=''
 	try:exec(f'import {lib}');return True
 	except:
 		pip=('pip3', 'python3 -m pip', 'python-pip', 'pip', 'python -m pip')
 		count=l(pip)
 		for i in pip:
+			if sudo:install='sudo '
+			install+=f'{i} install {lib}'
 			try:
-				system(f'{i} install {lib}')
+				system(install)
 				method.append("True")
-				exec(f'import {lib}')
 				got=True
 				count-=1
 				for i in range(count):method.append("skipped")
 			except:method.append("False");count-=1
-	if got:result=True
+	if got:
+		try:exec(f'import {lib}');result=True
+		except:
+			if output:print('failed to import lib.')
+			result=False
 	if output and not got:send=f"{bk}automatic pip install failed"
 	if output:send+=f"{bk}{' | '.join(pip)}{bk}{' | '.join(method)}{bk}";print(send)
 	return result
 
-def assure(libs, output=False):
+def assure(libs, output=False, sudo=False):
 	single=''
 	install=[]
 	array=False
@@ -134,9 +140,9 @@ def assure(libs, output=False):
 	if array:
 		result=[]
 		for lib in libs:
-			if single_assure(lib):result.append("True")
+			if single_assure(lib, sudo=sudo):result.append("True")
 			else:result.append("False")
-	else: result=single_assure(libs, output=output)
+	else: result=single_assure(libs, output=output, sudo=sudo)
 	if output and array:print(f"{bk}{' | '.join(libs)}{bk}{' | '.join(result)}{bk}")
 	return result
 
