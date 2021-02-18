@@ -8,7 +8,8 @@ except:
         try:os.system('pip install pyperclip')
         except:print('automatic pip failed. try install pyperclip manualy'); exit()
 while True:
-    senha=str(input('> ')).encode('utf-8')
+    try:senha=str(input('> ')).encode('utf-8')
+    except:pass
     sha244=hashlib.sha224(senha).hexdigest().encode('utf-8')
     sha256=hashlib.sha256(sha244).hexdigest().encode('utf-8')
     sha3_512=hashlib.sha3_512(sha256).hexdigest().encode('utf-8')
