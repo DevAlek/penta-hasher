@@ -14,7 +14,7 @@ hashs=('sha224', 'sha256', 'sha3_512', 'sha1', 'sha3_384')
 def external(isenha, ihash):
 	global external_input
 	try:
-		if ',' in ihash:ihash=ihash.replace(' ', '').ihash.split(',')
+		if ',' in ihash:ihash=ihash.split(',')
 	except:pass
 	senha=''
 	if isenha:
