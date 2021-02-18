@@ -102,35 +102,36 @@ def islink(line, dec=None):
 	return False
 
 def single_assure(lib: str, output=False, sudo=False):
-	result=False
-	install=''
-	method=[]
-	got=False
-	count=0
-	sudo=''
-	send=''
-	try:exec(f'import {lib}');return True
-	except:
-		pip=('pip3', 'python3 -m pip', 'python-pip', 'pip', 'python -m pip')
-		count=l(pip)
-		for i in pip:
-			if sudo:install='sudo '
-			install+=f'{i} install {lib}'
-			try:
-				system(install)
-				method.append("True")
-				got=True
-				count-=1
-				for i in range(count):method.append("skipped")
-			except:method.append("False");count-=1
-	if got:
-		try:exec(f'import {lib}');result=True
-		except:
-			if output:print('failed to import lib.')
-			result=False
-	if output and not got:send=f"{bk}automatic pip install failed"
-	if output:send+=f"{bk}{' | '.join(pip)}{bk}{' | '.join(method)}{bk}";print(send)
-	return result
+        result=False
+        install=''
+        got=False
+        count=0
+        sudo=''
+        send=''
+        try:exec(f'import {lib}');return True
+        except:
+            method=[]
+            pip=('pip3', 'python3 -m pip', 'python-pip', 'pip', 'python -m pip')
+            count=l(pip)-1
+            for i in pip:
+                count-=1
+                install=''
+                if sudo:install='sudo '
+                install+=f'{i} install {lib}'
+                try:
+                    s(install)
+                    method.append("True")
+                    got=True
+                    for i in range(count):method.append("skip")
+                except:method.append("False")
+        if got:
+            try:exec(f'import {lib}');result=True
+            except:
+                if output:print('failed to import lib.')
+                result=False
+        if output and not got:send=f"{bk}automatic pip install failed"
+        if output:send+=f"{bk}{'|'.join(pip)}{bk}{'|'.join(method)}{bk}";print(send)
+        return result
 
 def assure(libs, output=False, sudo=False):
 	single=''
@@ -147,8 +148,16 @@ def assure(libs, output=False, sudo=False):
 	if output and array:print(f"{bk}{' | '.join(libs)}{bk}{' | '.join(result)}{bk}")
 	return result
 
-def temp(file=None, value=None, auto=True):
-	pass
+def temp(file=None, value=None, overwrite=True, math=False, breakline="|",to=False,auto=True):
+    try:s('cd /.TEMP/')
+    except:s('mkdir /.TEMP/')
+    file=f"/.TEMP/{file}"
+	if save(file, value, overwrite=overwrite, math=math,breakline=breakline):
+        try:x=read(file, breakline, to)
+        except:return False
+        if auto:os.remove(file)
+        return x
+    else:return False
 
 def man(page="all"):
 	title="""
