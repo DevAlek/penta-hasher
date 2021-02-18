@@ -7,6 +7,7 @@ except:
     except:
         try:os.system('pip install pyperclip')
         except:print('automatic pip failed. try install pyperclip manualy'); exit()
+senha=''
 while True:
     try:senha=str(input('> ')).encode('utf-8')
     except:pass
