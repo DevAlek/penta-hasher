@@ -123,12 +123,10 @@ def single_assure(lib: str, output=False, sudo=False):
                     method.append("True")
                     got=True
                     for i in range(count):method.append("skip")
+                    break
                 except:method.append("False")
-        if got:
-            try:exec(f'import {lib}');result=True
-            except:
-                if output:print('failed to import lib.')
-                result=False
+        try:exec(f'import {lib}');result=True
+        except:return False
         if output and not got:send=f"{bk}automatic pip install failed"
         if output:send+=f"{bk}{'|'.join(pip)}{bk}{'|'.join(method)}{bk}";print(send)
         return result
