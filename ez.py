@@ -103,6 +103,7 @@ def islink(line, dec=None):
 
 def single_assure(lib: str, output=False, sudo=False):
 	result=False
+	install=''
 	method=[]
 	got=False
 	count=0
