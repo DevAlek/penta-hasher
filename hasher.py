@@ -5,7 +5,7 @@ import hashlib
 import os
 assure(('pyperclip'), True, True)
 import pyperclip
-senha=''
+senha=''.decode('utf-8')
 while True:
     try:senha=str(input('> ')).encode('utf-8')
     except:pass
