@@ -152,7 +152,7 @@ def temp(file=None, value=None, overwrite=True, math=False, breakline="|",to=Fal
     try:s('cd /.TEMP/')
     except:s('mkdir /.TEMP/')
     file=f"/.TEMP/{file}"
-	if save(file, value, overwrite=overwrite, math=math,breakline=breakline):
+    if save(file, value, overwrite=overwrite, math=math,breakline=breakline):
         try:x=read(file, breakline, to)
         except:return False
         if auto:os.remove(file)
