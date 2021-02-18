@@ -2,10 +2,11 @@
 from ez import *
 import hashlib
 import os
-assure(('pyperclip','keyboard'), True)
+assure(('pyperclip'), True, True)
+import pyperclip
 while True:
-    if keyboard.is_pressed('escape'): exit()
     senha=str(input('> ')).encode('utf-8')
+    if senha.decode('utf-8')==!:exit()
     sha244=hashlib.sha224(senha).hexdigest().encode('utf-8')
     sha256=hashlib.sha256(sha244).hexdigest().encode('utf-8')
     sha3_512=hashlib.sha3_512(sha256).hexdigest().encode('utf-8')
