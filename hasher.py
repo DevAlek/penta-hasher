@@ -1,11 +1,15 @@
 #!/usr/bin/python3
+from random import randint as random
 from ez import *
 import hashlib
 import os
 assure(('pyperclip'), True, True)
 import pyperclip
+senha=''
 while True:
-    senha=str(input('> ')).encode('utf-8')
+    try:senha=str(input('> ')).encode('utf-8')
+    except:pass
+    if senha.decode('utf-8')=='':new=random(100000, 999999);print(new);senha=str(new).encode('utf-8')
     if senha.decode('utf-8')=='!':exit()
     hashs=('sha224', 'sha256', 'sha3_512', 'sha1', 'sha3_384')
     for i in hashs:
