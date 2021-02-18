@@ -10,7 +10,7 @@ while True:
     try:
         senha=str(input('> ')).encode('utf-8')
         if senha.decode('utf-8')=='':new=random(100000, 999999);print(new);senha=str(new).encode('utf-8')
-        if senha.decode('utf-8')=='!':exit()
+        if senha.decode('utf-8')=='!':break;exit()
         hashs=('sha224', 'sha256', 'sha3_512', 'sha1', 'sha3_384')
         for i in hashs:
             senha=eval(f"hashlib.{i}({senha})").hexdigest().encode('utf-8')
